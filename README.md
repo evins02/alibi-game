@@ -15,9 +15,13 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
   Validierung (Mindestanzahl, eindeutige Namen)
 - **Spielmodus-Auswahl**: Klassisch, Chaos-Modus, Speed-Runde
 - **Zufällige Auslosung** von genau zwei Verdächtigen aus der Spielerliste
+- **Szenario-Generator**: zu jeder Runde wird zufällig ein Vorfall aus einem
+  Katalog von 20 Situationen gezogen, für den die Verdächtigen ein Alibi
+  erfinden müssen
 - **Navigation** zwischen allen Bildschirmen über React Navigation
   (Native Stack)
-- **Neue Auslosung** direkt aus dem Ergebnis-Bildschirm, ohne neu zu starten
+- **Neue Auslosung** direkt aus dem Ergebnis-Bildschirm (neue Verdächtige
+  *und* neues Szenario), ohne neu zu starten
 
 ## Projektstruktur
 
@@ -30,6 +34,8 @@ alibi-game/
 │   ├── components/
 │   │   ├── PartyButton.tsx     # Wiederverwendbarer Button (primary/secondary/ghost)
 │   │   └── ScreenContainer.tsx # Safe-Area-Wrapper mit dunklem Hintergrund
+│   ├── data/
+│   │   └── scenarios.ts        # Katalog der Alibi-Vorfälle
 │   ├── navigation/
 │   │   └── AppNavigator.tsx    # Native-Stack-Navigator + Dark Theme
 │   ├── screens/
@@ -44,7 +50,7 @@ alibi-game/
 │   │   ├── game.ts             # Spielmodi, Suspects-Typ
 │   │   └── navigation.ts       # RootStackParamList für type-safe Navigation
 │   └── utils/
-│       └── random.ts           # Zufällige Auswahl der zwei Verdächtigen
+│       └── random.ts           # Zufällige Auswahl von Verdächtigen & Szenario
 └── assets/                      # App-Icons, Splash-Screen
 ```
 
@@ -98,14 +104,16 @@ Manueller Test-Ablauf für das Spiel:
 2. Auf **„Spiel starten“** tippen
 3. 3–10 Spielernamen eingeben (Namen müssen eindeutig sein)
 4. Einen Spielmodus auswählen und auf **„Verdächtige auslosen“** tippen
-5. Prüfen, dass zwei unterschiedliche Spieler als Verdächtige angezeigt
-   werden
-6. Über **„Neue Auslosung“** eine erneute Zufallsauswahl testen
+5. Prüfen, dass zwei unterschiedliche Spieler als Verdächtige **und** ein
+   Vorfall-Szenario angezeigt werden
+6. Über **„Neue Auslosung“** eine erneute Zufallsauswahl (Verdächtige +
+   Szenario) testen
 7. Über **„Zurück zum Start“** zum Startbildschirm zurückkehren
 
 ## Geplante nächste Schritte
 
-- Rollen-/Frage-Katalog für die Befragung
+- Abstimmungs-/Auflösungsrunde am Ende (wer hat gelogen? Punkte/Sieger)
 - Timer-Umsetzung für die Speed-Runde
+- Mehr Rollen bei größeren Gruppen (z. B. dritter Verdächtiger, Detektiv)
 - Soundeffekte und Übergangsanimationen
 - Persistente letzte Spielerliste (lokal, ohne Backend)

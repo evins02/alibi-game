@@ -14,3 +14,11 @@ export function pickTwoSuspects(players: string[]): Suspects {
 
   return { first, second };
 }
+
+/** Picks one random entry from a non-empty list of scenarios. */
+export function pickRandomScenario(scenarios: string[]): string {
+  if (scenarios.length === 0) {
+    throw new Error('Es sind keine Szenarien verfügbar.');
+  }
+  return scenarios[Math.floor(Math.random() * scenarios.length)];
+}
