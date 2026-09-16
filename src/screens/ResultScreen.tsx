@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../types/navigation';
+import type { Verdict } from '../types/game';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PartyButton } from '../components/PartyButton';
 import { useGameSession } from '../context/GameSessionContext';
@@ -11,8 +12,13 @@ import { radius, spacing } from '../theme/spacing';
 type Props = NativeStackScreenProps<RootStackParamList, 'Result'>;
 
 export function ResultScreen({ navigation, route }: Props) {
-  const { players, modeId, suspects, verdict } = route.params;
+  const { players, modeId, suspects, scenario, guilty, accused } = route.params;
   const { score, recordRound } = useGameSession();
+
+  const guiltyName = guilty === 'first' ? suspects.first : suspects.second;
+  const accusedName = accused === 'first' ? suspects.first : suspects.second;
+  const caughtRightPerson = accused === guilty;
+  const verdict: Verdict = caughtRightPerson ? 'caught' : 'believed';
 
   // Guard against double-counting if this screen re-renders (e.g. fast refresh).
   const recordedVerdict = useRef<string | null>(null);
@@ -22,8 +28,6 @@ export function ResultScreen({ navigation, route }: Props) {
       recordRound(verdict);
     }
   }, [verdict, recordRound]);
-
-  const suspectsWon = verdict === 'believed';
 
   function handleNextRound() {
     navigation.replace('Reveal', { players, modeId });
@@ -35,25 +39,35 @@ export function ResultScreen({ navigation, route }: Props) {
 
   return (
     <ScreenContainer style={styles.container}>
-      <View style={styles.resultBlock}>
-        <Text style={styles.emoji}>{suspectsWon ? '🎭' : '🚨'}</Text>
-        <Text style={styles.title}>
-          {suspectsWon ? 'Die Verdächtigen gewinnen!' : 'Die Ermittler gewinnen!'}
-        </Text>
-        <Text style={styles.description}>
-          {suspectsWon
-            ? `${suspects.first} und ${suspects.second} haben mit ihrem Alibi überzeugt.`
-            : `Die Ermittler haben einen Widerspruch bei ${suspects.first} und ${suspects.second} gefunden.`}
-        </Text>
-      </View>
-
-      <View style={styles.scoreCard}>
-        <Text style={styles.scoreLabel}>Punktestand dieser Session</Text>
-        <View style={styles.scoreRow}>
-          <ScorePill label="Verdächtige" value={score.suspectsWins} />
-          <ScorePill label="Ermittler" value={score.investigatorsWins} />
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.resultBlock}>
+          <Text style={styles.emoji}>{caughtRightPerson ? '🚨' : '🎭'}</Text>
+          <Text style={styles.title}>
+            {caughtRightPerson ? 'Die Ermittler gewinnen!' : 'Der/die Schuldige entkommt!'}
+          </Text>
+          <Text style={styles.description}>
+            {caughtRightPerson
+              ? `Richtig! ${guiltyName} war tatsächlich schuldig und wurde entlarvt.`
+              : `Falsch! Die Ermittler haben ${accusedName} beschuldigt, aber ${guiltyName} war die/der wahre Täter*in.`}
+          </Text>
         </View>
-      </View>
+
+        <View style={styles.truthCard}>
+          <Text style={styles.truthLabel}>Was wirklich passiert ist</Text>
+          <Text style={styles.truthText}>{scenario.secretDetail}</Text>
+        </View>
+
+        <View style={styles.scoreCard}>
+          <Text style={styles.scoreLabel}>Punktestand dieser Session</Text>
+          <View style={styles.scoreRow}>
+            <ScorePill label="Schuldige entkommen" value={score.suspectsWins} />
+            <ScorePill label="Ermittler richtig" value={score.investigatorsWins} />
+          </View>
+        </View>
+      </ScrollView>
 
       <View style={styles.actions}>
         <PartyButton label="Nächste Runde" onPress={handleNextRound} />
@@ -78,8 +92,12 @@ function ScorePill({ label, value }: { label: string; value: number }) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
-    paddingVertical: spacing.xl,
+    paddingTop: spacing.xl,
+    paddingBottom: spacing.lg,
+  },
+  scrollContent: {
+    gap: spacing.md,
+    paddingBottom: spacing.lg,
   },
   resultBlock: {
     alignItems: 'center',
@@ -101,8 +119,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     lineHeight: 20,
   },
-  scoreCard: {
+  truthCard: {
     backgroundColor: colors.surfaceAlt,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.lg,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.md,
+  },
+  truthLabel: {
+    color: colors.warning,
+    fontSize: 13,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    textAlign: 'center',
+    marginBottom: spacing.xs,
+  },
+  truthText: {
+    color: colors.text,
+    fontSize: 16,
+    lineHeight: 22,
+    textAlign: 'center',
+  },
+  scoreCard: {
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.lg,
@@ -123,6 +164,7 @@ const styles = StyleSheet.create({
   },
   pill: {
     alignItems: 'center',
+    maxWidth: '45%',
   },
   pillValue: {
     color: colors.text,
@@ -133,6 +175,7 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 13,
     marginTop: spacing.xs,
+    textAlign: 'center',
   },
   actions: {
     gap: spacing.sm,

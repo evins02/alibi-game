@@ -6,6 +6,7 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { PlayerSetupScreen } from '../screens/PlayerSetupScreen';
 import { ModeSelectScreen } from '../screens/ModeSelectScreen';
 import { RevealScreen } from '../screens/RevealScreen';
+import { RoleRevealScreen } from '../screens/RoleRevealScreen';
 import { VotingScreen } from '../screens/VotingScreen';
 import { ResultScreen } from '../screens/ResultScreen';
 import { colors } from '../theme/colors';
@@ -54,6 +55,11 @@ export function AppNavigator() {
           name="Reveal"
           component={RevealScreen}
           options={{ title: 'Verdächtige', headerBackVisible: false }}
+        />
+        <Stack.Screen
+          name="RoleReveal"
+          component={RoleRevealScreen}
+          options={{ title: 'Geheime Rolle', headerBackVisible: false }}
         />
         <Stack.Screen
           name="Voting"

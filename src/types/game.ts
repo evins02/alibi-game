@@ -12,21 +12,21 @@ export const GAME_MODES: GameMode[] = [
     id: 'classic',
     title: 'Klassisch',
     description:
-      'Die zwei Verdächtigen verlassen den Raum und erfinden gemeinsam ein Alibi. Die restliche Gruppe befragt sie einzeln.',
+      'Eine*r der beiden Verdächtigen ist heimlich wirklich schuldig, der/die andere ist unschuldig – beide sehen ihre Rolle geheim auf dem Gerät, ohne sich vorher abzusprechen. Danach befragen die Ermittler beide einzeln.',
     emoji: '🕵️',
   },
   {
     id: 'chaos',
     title: 'Chaos-Modus',
     description:
-      'Wie Klassisch, aber mit einer verrückten Zusatzregel, die sich die Gruppe vorher ausdenkt (z. B. nur flüstern, ein Wort pro Antwort).',
+      'Wie Klassisch, aber mit einer verrückten Zusatzregel, die sich die Ermittler vorher ausdenken (z. B. nur Ja/Nein-Antworten, im Dialekt sprechen).',
     emoji: '🌀',
   },
   {
     id: 'speed',
     title: 'Speed-Runde',
     description:
-      'Die Verdächtigen haben nur 60 Sekunden, um ihr Alibi abzustimmen, bevor die Befragung beginnt.',
+      'Wie Klassisch, aber die Ermittler geben sich selbst nur wenige Minuten Zeit für die Befragung, bevor abgestimmt werden muss.',
     emoji: '⏱️',
   },
 ];
@@ -44,5 +44,15 @@ export interface Suspects {
   second: string;
 }
 
-/** Outcome of a round's group vote: did the suspects convince everyone? */
+/** Identifies one of the two suspects without needing their name. */
+export type SuspectKey = 'first' | 'second';
+
+export interface Scenario {
+  /** The incident everyone (suspects and investigators) is told about. */
+  incident: string;
+  /** What actually happened – shown only to the guilty suspect. */
+  secretDetail: string;
+}
+
+/** Outcome of a round's accusation: did the investigators catch the guilty suspect? */
 export type Verdict = 'believed' | 'caught';

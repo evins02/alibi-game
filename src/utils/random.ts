@@ -1,4 +1,4 @@
-import type { Suspects } from '../types/game';
+import type { Scenario, SuspectKey, Suspects } from '../types/game';
 
 /** Picks two distinct random players from the list, order does not matter. */
 export function pickTwoSuspects(players: string[]): Suspects {
@@ -16,9 +16,14 @@ export function pickTwoSuspects(players: string[]): Suspects {
 }
 
 /** Picks one random entry from a non-empty list of scenarios. */
-export function pickRandomScenario(scenarios: string[]): string {
+export function pickRandomScenario(scenarios: Scenario[]): Scenario {
   if (scenarios.length === 0) {
     throw new Error('Es sind keine Szenarien verfügbar.');
   }
   return scenarios[Math.floor(Math.random() * scenarios.length)];
+}
+
+/** Coin flip deciding which of the two suspects is secretly guilty. */
+export function pickGuiltySuspect(): SuspectKey {
+  return Math.random() < 0.5 ? 'first' : 'second';
 }

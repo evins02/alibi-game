@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../types/navigation';
-import type { Verdict } from '../types/game';
+import type { SuspectKey } from '../types/game';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { colors } from '../theme/colors';
 import { radius, spacing } from '../theme/spacing';
@@ -10,61 +10,47 @@ import { radius, spacing } from '../theme/spacing';
 type Props = NativeStackScreenProps<RootStackParamList, 'Voting'>;
 
 export function VotingScreen({ navigation, route }: Props) {
-  const { players, modeId, suspects, scenario } = route.params;
+  const { players, modeId, suspects, scenario, guilty } = route.params;
   const investigatorCount = players.length - 2;
 
-  function handleVote(verdict: Verdict) {
-    navigation.navigate('Result', { players, modeId, suspects, scenario, verdict });
+  function handleAccuse(accused: SuspectKey) {
+    navigation.navigate('Result', {
+      players,
+      modeId,
+      suspects,
+      scenario,
+      guilty,
+      accused,
+    });
   }
 
   return (
     <ScreenContainer style={styles.container}>
       <View>
-        <Text style={styles.title}>Zeit für die Abstimmung</Text>
+        <Text style={styles.title}>Wer ist schuldig?</Text>
         <Text style={styles.subtitle}>
-          Alle {investigatorCount} Ermittler stimmen jetzt gemeinsam (z. B.
-          per Handzeichen) ab: War das Alibi von {suspects.first} und{' '}
-          {suspects.second} glaubwürdig?
+          Alle {investigatorCount} Ermittler einigen sich jetzt gemeinsam (z.
+          B. per Handzeichen oder Diskussion) auf eine Anschuldigung.
         </Text>
       </View>
 
       <View style={styles.optionsBlock}>
-        <VoteOption
-          emoji="🎭"
-          title="Verdächtige haben überzeugt"
-          description="Die Geschichte hatte keine Widersprüche – die Verdächtigen gewinnen die Runde."
-          onPress={() => handleVote('believed')}
-        />
-        <VoteOption
-          emoji="🚨"
-          title="Verdächtige sind aufgeflogen"
-          description="Die Ermittler haben einen Widerspruch gefunden – die Ermittler gewinnen die Runde."
-          onPress={() => handleVote('caught')}
-        />
+        <AccuseOption name={suspects.first} onPress={() => handleAccuse('first')} />
+        <AccuseOption name={suspects.second} onPress={() => handleAccuse('second')} />
       </View>
     </ScreenContainer>
   );
 }
 
-function VoteOption({
-  emoji,
-  title,
-  description,
-  onPress,
-}: {
-  emoji: string;
-  title: string;
-  description: string;
-  onPress: () => void;
-}) {
+function AccuseOption({ name, onPress }: { name: string; onPress: () => void }) {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [styles.option, pressed && styles.optionPressed]}
     >
-      <Text style={styles.optionEmoji}>{emoji}</Text>
-      <Text style={styles.optionTitle}>{title}</Text>
-      <Text style={styles.optionDescription}>{description}</Text>
+      <Text style={styles.optionEmoji}>👉</Text>
+      <Text style={styles.optionTitle}>{name}</Text>
+      <Text style={styles.optionDescription}>ist schuldig</Text>
     </Pressable>
   );
 }
@@ -102,20 +88,19 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   optionEmoji: {
-    fontSize: 36,
+    fontSize: 32,
     marginBottom: spacing.sm,
   },
   optionTitle: {
     color: colors.text,
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 22,
+    fontWeight: '800',
     textAlign: 'center',
-    marginBottom: spacing.xs,
   },
   optionDescription: {
     color: colors.textMuted,
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
-    lineHeight: 18,
+    marginTop: spacing.xs,
   },
 });

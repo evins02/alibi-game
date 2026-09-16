@@ -5,7 +5,7 @@ import type { RootStackParamList } from '../types/navigation';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PartyButton } from '../components/PartyButton';
 import { getGameMode } from '../types/game';
-import { pickTwoSuspects, pickRandomScenario } from '../utils/random';
+import { pickTwoSuspects, pickRandomScenario, pickGuiltySuspect } from '../utils/random';
 import { SCENARIOS } from '../data/scenarios';
 import { colors } from '../theme/colors';
 import { radius, spacing } from '../theme/spacing';
@@ -16,11 +16,12 @@ export function RevealScreen({ navigation, route }: Props) {
   const { players, modeId } = route.params;
   const mode = getGameMode(modeId);
 
-  // Suspects and scenario are drawn once per Reveal screen visit and stay
-  // stable across re-renders; a "new round" replaces the whole screen so a
-  // fresh combination gets picked.
+  // Suspects, scenario and who is secretly guilty are drawn once per Reveal
+  // screen visit and stay stable across re-renders; a "new round" replaces
+  // the whole screen so a fresh combination gets picked.
   const suspects = useMemo(() => pickTwoSuspects(players), [players]);
   const scenario = useMemo(() => pickRandomScenario(SCENARIOS), [players]);
+  const guilty = useMemo(() => pickGuiltySuspect(), [players]);
 
   function handleNewRound() {
     navigation.replace('Reveal', { players, modeId });
@@ -30,8 +31,8 @@ export function RevealScreen({ navigation, route }: Props) {
     navigation.popToTop();
   }
 
-  function handleContinueToVoting() {
-    navigation.navigate('Voting', { players, modeId, suspects, scenario });
+  function handleShowRoles() {
+    navigation.navigate('RoleReveal', { players, modeId, suspects, scenario, guilty });
   }
 
   return (
@@ -46,15 +47,14 @@ export function RevealScreen({ navigation, route }: Props) {
 
         <View style={styles.scenarioCard}>
           <Text style={styles.scenarioLabel}>Der Vorfall</Text>
-          <Text style={styles.scenarioText}>{scenario}</Text>
+          <Text style={styles.scenarioText}>{scenario.incident}</Text>
         </View>
 
         <Text style={styles.instructions}>
-          Gebt das Gerät jetzt an alle weiter. Nur diese zwei Personen dürfen
-          die Verdächtigen sein – sie ziehen sich zurück und erfinden ein
-          gemeinsames Alibi für den Vorfall oben. Alle anderen sind Ermittler
-          und befragen die beiden danach einzeln. Wenn die Befragung fertig
-          ist, geht es unten weiter zur Abstimmung.
+          Diese zwei Personen sind verdächtig. Nur eine*r von beiden ist
+          wirklich schuldig – aber wer das ist, weiß bisher niemand, nicht
+          einmal die beiden selbst. Gleich sieht jede*r geheim die eigene
+          Rolle, ohne dass die andere Person mitschaut.
         </Text>
 
         <View style={styles.suspectsBlock}>
@@ -65,10 +65,7 @@ export function RevealScreen({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.actions}>
-        <PartyButton
-          label="Weiter zur Abstimmung"
-          onPress={handleContinueToVoting}
-        />
+        <PartyButton label="Geheime Rollen ansehen" onPress={handleShowRoles} />
         <PartyButton
           label="Neue Auslosung"
           variant="secondary"
