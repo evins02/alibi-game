@@ -18,10 +18,13 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
 - **Szenario-Generator**: zu jeder Runde wird zufällig ein Vorfall aus einem
   Katalog von 20 Situationen gezogen, für den die Verdächtigen ein Alibi
   erfinden müssen
+- **Abstimmungs- & Ergebnis-Runde**: nach der Befragung stimmt die Gruppe ab,
+  ob das Alibi überzeugt hat, danach zeigt ein Ergebnis-Bildschirm den
+  Rundensieger und den laufenden Punktestand der Session an
 - **Navigation** zwischen allen Bildschirmen über React Navigation
   (Native Stack)
-- **Neue Auslosung** direkt aus dem Ergebnis-Bildschirm (neue Verdächtige
-  *und* neues Szenario), ohne neu zu starten
+- **Neue Runde** direkt aus dem Ergebnis-Bildschirm (neue Verdächtige *und*
+  neues Szenario), ohne neu zu starten
 
 ## Projektstruktur
 
@@ -34,6 +37,8 @@ alibi-game/
 │   ├── components/
 │   │   ├── PartyButton.tsx     # Wiederverwendbarer Button (primary/secondary/ghost)
 │   │   └── ScreenContainer.tsx # Safe-Area-Wrapper mit dunklem Hintergrund
+│   ├── context/
+│   │   └── GameSessionContext.tsx # Punktestand über die laufende Session
 │   ├── data/
 │   │   └── scenarios.ts        # Katalog der Alibi-Vorfälle
 │   ├── navigation/
@@ -42,12 +47,14 @@ alibi-game/
 │   │   ├── HomeScreen.tsx
 │   │   ├── PlayerSetupScreen.tsx
 │   │   ├── ModeSelectScreen.tsx
-│   │   └── RevealScreen.tsx
+│   │   ├── RevealScreen.tsx
+│   │   ├── VotingScreen.tsx
+│   │   └── ResultScreen.tsx
 │   ├── theme/
 │   │   ├── colors.ts           # Farbpalette (dunkles Party-Design)
 │   │   └── spacing.ts          # Abstände & Radien
 │   ├── types/
-│   │   ├── game.ts             # Spielmodi, Suspects-Typ
+│   │   ├── game.ts             # Spielmodi, Suspects-/Verdict-Typ
 │   │   └── navigation.ts       # RootStackParamList für type-safe Navigation
 │   └── utils/
 │       └── random.ts           # Zufällige Auswahl von Verdächtigen & Szenario
@@ -106,13 +113,16 @@ Manueller Test-Ablauf für das Spiel:
 4. Einen Spielmodus auswählen und auf **„Verdächtige auslosen“** tippen
 5. Prüfen, dass zwei unterschiedliche Spieler als Verdächtige **und** ein
    Vorfall-Szenario angezeigt werden
-6. Über **„Neue Auslosung“** eine erneute Zufallsauswahl (Verdächtige +
-   Szenario) testen
-7. Über **„Zurück zum Start“** zum Startbildschirm zurückkehren
+6. Auf **„Weiter zur Abstimmung“** tippen, eine der beiden Optionen wählen
+7. Prüfen, dass der Ergebnis-Bildschirm den richtigen Sieger und einen
+   Punktestand (1:0 o. ä.) anzeigt
+8. Über **„Nächste Runde“** mehrfach spielen und prüfen, dass sich der
+   Punktestand richtig hochzählt
+9. Über **„Spiel beenden“** zum Startbildschirm zurückkehren und ein neues
+   Spiel starten – der Punktestand muss dabei auf 0:0 zurückgesetzt sein
 
 ## Geplante nächste Schritte
 
-- Abstimmungs-/Auflösungsrunde am Ende (wer hat gelogen? Punkte/Sieger)
 - Timer-Umsetzung für die Speed-Runde
 - Mehr Rollen bei größeren Gruppen (z. B. dritter Verdächtiger, Detektiv)
 - Soundeffekte und Übergangsanimationen

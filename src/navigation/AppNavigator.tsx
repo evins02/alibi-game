@@ -6,6 +6,8 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { PlayerSetupScreen } from '../screens/PlayerSetupScreen';
 import { ModeSelectScreen } from '../screens/ModeSelectScreen';
 import { RevealScreen } from '../screens/RevealScreen';
+import { VotingScreen } from '../screens/VotingScreen';
+import { ResultScreen } from '../screens/ResultScreen';
 import { colors } from '../theme/colors';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -52,6 +54,16 @@ export function AppNavigator() {
           name="Reveal"
           component={RevealScreen}
           options={{ title: 'Verdächtige', headerBackVisible: false }}
+        />
+        <Stack.Screen
+          name="Voting"
+          component={VotingScreen}
+          options={{ title: 'Abstimmung', headerBackVisible: false }}
+        />
+        <Stack.Screen
+          name="Result"
+          component={ResultScreen}
+          options={{ title: 'Ergebnis', headerBackVisible: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

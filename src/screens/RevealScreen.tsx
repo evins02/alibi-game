@@ -30,6 +30,10 @@ export function RevealScreen({ navigation, route }: Props) {
     navigation.popToTop();
   }
 
+  function handleContinueToVoting() {
+    navigation.navigate('Voting', { players, modeId, suspects, scenario });
+  }
+
   return (
     <ScreenContainer style={styles.container}>
       <ScrollView
@@ -48,7 +52,9 @@ export function RevealScreen({ navigation, route }: Props) {
         <Text style={styles.instructions}>
           Gebt das Gerät jetzt an alle weiter. Nur diese zwei Personen dürfen
           die Verdächtigen sein – sie ziehen sich zurück und erfinden ein
-          gemeinsames Alibi für den Vorfall oben. Alle anderen sind Ermittler.
+          gemeinsames Alibi für den Vorfall oben. Alle anderen sind Ermittler
+          und befragen die beiden danach einzeln. Wenn die Befragung fertig
+          ist, geht es unten weiter zur Abstimmung.
         </Text>
 
         <View style={styles.suspectsBlock}>
@@ -59,10 +65,18 @@ export function RevealScreen({ navigation, route }: Props) {
       </ScrollView>
 
       <View style={styles.actions}>
-        <PartyButton label="Neue Auslosung" onPress={handleNewRound} />
+        <PartyButton
+          label="Weiter zur Abstimmung"
+          onPress={handleContinueToVoting}
+        />
+        <PartyButton
+          label="Neue Auslosung"
+          variant="secondary"
+          onPress={handleNewRound}
+        />
         <PartyButton
           label="Zurück zum Start"
-          variant="secondary"
+          variant="ghost"
           onPress={handleBackToHome}
         />
       </View>

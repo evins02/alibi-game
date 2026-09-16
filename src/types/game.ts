@@ -43,3 +43,6 @@ export interface Suspects {
   first: string;
   second: string;
 }
+
+/** Outcome of a round's group vote: did the suspects convince everyone? */
+export type Verdict = 'believed' | 'caught';

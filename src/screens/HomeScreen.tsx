@@ -1,15 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useFocusEffect } from '@react-navigation/native';
 import type { RootStackParamList } from '../types/navigation';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PartyButton } from '../components/PartyButton';
+import { useGameSession } from '../context/GameSessionContext';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export function HomeScreen({ navigation }: Props) {
+  const { resetScore } = useGameSession();
+
+  // Being back at Home always means a fresh session, whether on first
+  // launch or after a previous game ended.
+  useFocusEffect(
+    React.useCallback(() => {
+      resetScore();
+    }, [resetScore]),
+  );
+
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.hero}>
