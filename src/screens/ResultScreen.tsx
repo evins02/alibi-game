@@ -12,7 +12,7 @@ import { radius, spacing } from '../theme/spacing';
 type Props = NativeStackScreenProps<RootStackParamList, 'Result'>;
 
 export function ResultScreen({ navigation, route }: Props) {
-  const { players, modeId, suspects, scenario, guilty, accused } = route.params;
+  const { players, modeId, suspects, scenario, guilty, accomplices, accused } = route.params;
   const { score, recordRound } = useGameSession();
 
   const guiltyName = guilty === 'first' ? suspects.first : suspects.second;
@@ -59,6 +59,15 @@ export function ResultScreen({ navigation, route }: Props) {
           <Text style={styles.truthLabel}>Was wirklich passiert ist</Text>
           <Text style={styles.truthText}>{scenario.secretDetail}</Text>
         </View>
+
+        {accomplices.length > 0 && (
+          <View style={styles.truthCard}>
+            <Text style={styles.truthLabel}>
+              {accomplices.length === 1 ? 'Der/die Mitwisser*in war' : 'Die Mitwisser*innen waren'}
+            </Text>
+            <Text style={styles.truthText}>{accomplices.join(', ')}</Text>
+          </View>
+        )}
 
         <View style={styles.scoreCard}>
           <Text style={styles.scoreLabel}>Punktestand dieser Session</Text>

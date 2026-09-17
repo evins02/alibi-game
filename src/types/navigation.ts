@@ -11,6 +11,7 @@ export type RootStackParamList = {
     suspects: Suspects;
     scenario: Scenario;
     guilty: SuspectKey;
+    accomplices: string[];
   };
   Voting: {
     players: string[];
@@ -18,6 +19,7 @@ export type RootStackParamList = {
     suspects: Suspects;
     scenario: Scenario;
     guilty: SuspectKey;
+    accomplices: string[];
   };
   Result: {
     players: string[];
@@ -25,6 +27,7 @@ export type RootStackParamList = {
     suspects: Suspects;
     scenario: Scenario;
     guilty: SuspectKey;
+    accomplices: string[];
     accused: SuspectKey;
   };
 };

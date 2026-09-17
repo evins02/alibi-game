@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../types/navigation';
-import type { SuspectKey } from '../types/game';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PartyButton } from '../components/PartyButton';
 import { colors } from '../theme/colors';
@@ -10,21 +9,41 @@ import { radius, spacing } from '../theme/spacing';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RoleReveal'>;
 
+type TurnRole = 'guilty' | 'innocent' | 'accomplice';
+
+interface Turn {
+  name: string;
+  role: TurnRole;
+}
+
 export function RoleRevealScreen({ navigation, route }: Props) {
-  const { players, modeId, suspects, scenario, guilty } = route.params;
-  const order: { key: SuspectKey; name: string }[] = [
-    { key: 'first', name: suspects.first },
-    { key: 'second', name: suspects.second },
-  ];
+  const { players, modeId, suspects, scenario, guilty, accomplices } = route.params;
+  const guiltyName = guilty === 'first' ? suspects.first : suspects.second;
+
+  const turns: Turn[] = useMemo(
+    () => [
+      { name: suspects.first, role: guilty === 'first' ? 'guilty' : 'innocent' },
+      { name: suspects.second, role: guilty === 'second' ? 'guilty' : 'innocent' },
+      ...accomplices.map((name): Turn => ({ name, role: 'accomplice' })),
+    ],
+    [suspects, guilty, accomplices],
+  );
 
   const [turnIndex, setTurnIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
 
   function handleContinueToVoting() {
-    navigation.navigate('Voting', { players, modeId, suspects, scenario, guilty });
+    navigation.navigate('Voting', {
+      players,
+      modeId,
+      suspects,
+      scenario,
+      guilty,
+      accomplices,
+    });
   }
 
-  if (turnIndex >= order.length) {
+  if (turnIndex >= turns.length) {
     return (
       <ScreenContainer style={styles.container}>
         <View style={styles.center}>
@@ -33,7 +52,7 @@ export function RoleRevealScreen({ navigation, route }: Props) {
           <Text style={styles.subtitle}>
             Gebt das Gerät jetzt an alle zurück. Die Ermittler befragen{' '}
             {suspects.first} und {suspects.second} nun einzeln – niemand
-            außer den beiden selbst kennt ihre eigene Rolle.
+            außer den Beteiligten kennt die eigene Rolle der anderen.
           </Text>
         </View>
         <PartyButton
@@ -44,8 +63,7 @@ export function RoleRevealScreen({ navigation, route }: Props) {
     );
   }
 
-  const current = order[turnIndex];
-  const isGuilty = current.key === guilty;
+  const current = turns[turnIndex];
 
   function handleAdvance() {
     setRevealed(false);
@@ -74,7 +92,7 @@ export function RoleRevealScreen({ navigation, route }: Props) {
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.center}>
-        {isGuilty ? (
+        {current.role === 'guilty' && (
           <>
             <Text style={styles.roleEmoji}>🔴</Text>
             <Text style={styles.roleTitle}>Du bist schuldig</Text>
@@ -87,7 +105,9 @@ export function RoleRevealScreen({ navigation, route }: Props) {
               glaubwürdige Antworten aus, ohne dich zu verraten.
             </Text>
           </>
-        ) : (
+        )}
+
+        {current.role === 'innocent' && (
           <>
             <Text style={styles.roleEmoji}>🟢</Text>
             <Text style={styles.roleTitle}>Du bist unschuldig</Text>
@@ -95,6 +115,22 @@ export function RoleRevealScreen({ navigation, route }: Props) {
               Du weißt nicht, was wirklich passiert ist. Antworte einfach
               ehrlich und aus dem Bauch heraus – auch wenn du dadurch
               verdächtig wirken könntest.
+            </Text>
+          </>
+        )}
+
+        {current.role === 'accomplice' && (
+          <>
+            <Text style={styles.roleEmoji}>🤐</Text>
+            <Text style={styles.roleTitle}>Du bist Mitwisser*in</Text>
+            <View style={styles.detailCard}>
+              <Text style={styles.detailLabel}>Geheimwissen</Text>
+              <Text style={styles.detailText}>{guiltyName} ist schuldig.</Text>
+            </View>
+            <Text style={styles.subtitle}>
+              Tu während der Befragung so, als wärst du ein ganz normaler
+              Ermittler. Versuch geschickt, den Verdacht von {guiltyName}{' '}
+              wegzulenken, ohne dass jemand merkt, dass du es weißt.
             </Text>
           </>
         )}

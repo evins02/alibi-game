@@ -5,7 +5,13 @@ import type { RootStackParamList } from '../types/navigation';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PartyButton } from '../components/PartyButton';
 import { getGameMode } from '../types/game';
-import { pickTwoSuspects, pickRandomScenario, pickGuiltySuspect } from '../utils/random';
+import {
+  pickTwoSuspects,
+  pickRandomScenario,
+  pickGuiltySuspect,
+  getAccompliceCount,
+  pickAccomplices,
+} from '../utils/random';
 import { SCENARIOS } from '../data/scenarios';
 import { colors } from '../theme/colors';
 import { radius, spacing } from '../theme/spacing';
@@ -22,6 +28,10 @@ export function RevealScreen({ navigation, route }: Props) {
   const suspects = useMemo(() => pickTwoSuspects(players), [players]);
   const scenario = useMemo(() => pickRandomScenario(SCENARIOS), [players]);
   const guilty = useMemo(() => pickGuiltySuspect(), [players]);
+  const accomplices = useMemo(
+    () => pickAccomplices(players, suspects, getAccompliceCount(players.length)),
+    [players, suspects],
+  );
 
   function handleNewRound() {
     navigation.replace('Reveal', { players, modeId });
@@ -32,7 +42,14 @@ export function RevealScreen({ navigation, route }: Props) {
   }
 
   function handleShowRoles() {
-    navigation.navigate('RoleReveal', { players, modeId, suspects, scenario, guilty });
+    navigation.navigate('RoleReveal', {
+      players,
+      modeId,
+      suspects,
+      scenario,
+      guilty,
+      accomplices,
+    });
   }
 
   return (
@@ -55,6 +72,8 @@ export function RevealScreen({ navigation, route }: Props) {
           wirklich schuldig – aber wer das ist, weiß bisher niemand, nicht
           einmal die beiden selbst. Gleich sieht jede*r geheim die eigene
           Rolle, ohne dass die andere Person mitschaut.
+          {accomplices.length > 0 &&
+            ` Außerdem gibt es diese Runde ${accomplices.length === 1 ? 'einen heimlichen Mitwisser' : `${accomplices.length} heimliche Mitwisser`} unter den Ermittlern.`}
         </Text>
 
         <View style={styles.suspectsBlock}>

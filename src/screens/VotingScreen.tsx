@@ -10,7 +10,7 @@ import { radius, spacing } from '../theme/spacing';
 type Props = NativeStackScreenProps<RootStackParamList, 'Voting'>;
 
 export function VotingScreen({ navigation, route }: Props) {
-  const { players, modeId, suspects, scenario, guilty } = route.params;
+  const { players, modeId, suspects, scenario, guilty, accomplices } = route.params;
   const investigatorCount = players.length - 2;
 
   function handleAccuse(accused: SuspectKey) {
@@ -20,6 +20,7 @@ export function VotingScreen({ navigation, route }: Props) {
       suspects,
       scenario,
       guilty,
+      accomplices,
       accused,
     });
   }

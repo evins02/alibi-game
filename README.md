@@ -22,9 +22,12 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
 4. Alle anderen sind Ermittler und befragen beide einzeln – die Verdächtigen
    konnten sich **nicht** vorher absprechen, weil keiner wusste, wer schuldig
    ist
-5. Die Ermittler einigen sich auf eine Anschuldigung
-6. Auflösung: wer war wirklich schuldig, was ist wirklich passiert, und wer
-   hat die Runde gewonnen?
+5. **Ab 6 Spielern** gibt's zusätzlich 1, **ab 8 Spielern** 2 "Mitwisser*innen"
+   🤐 – ganz normale Ermittler, die aber heimlich wissen, wer schuldig ist,
+   und unauffällig den Verdacht weglenken sollen
+6. Die Ermittler einigen sich auf eine Anschuldigung
+7. Auflösung: wer war wirklich schuldig, was ist wirklich passiert, wer waren
+   die Mitwisser*innen, und wer hat die Runde gewonnen?
 
 ## Funktionsumfang (aktueller Stand)
 
@@ -35,12 +38,15 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
 - **Zufällige Auslosung** von zwei Verdächtigen, einem Vorfall-Szenario aus
   einem Katalog von 20 Situationen, und wer von beiden wirklich schuldig ist
 - **Geheimer Rollen-Reveal**: sequenzieller Tap-to-reveal-Flow, bei dem jede
-  verdächtigte Person nur die eigene Rolle sieht, bevor das Gerät an die
+  beteiligte Person nur die eigene Rolle sieht, bevor das Gerät an die
   nächste Person weitergegeben wird
+- **Mitwisser-Rolle bei größeren Gruppen**: ab 6 Spielern 1, ab 8 Spielern 2
+  zusätzliche "Mitwisser*innen", die heimlich wissen, wer schuldig ist
 - **Echte Anschuldigung**: die Ermittler entscheiden sich für eine*n
   Verdächtige*n statt nur vage abzustimmen
-- **Auflösung mit Payoff**: zeigt den echten Hergang und ob die Ermittler
-  richtiglagen, plus laufenden Punktestand der Session
+- **Auflösung mit Payoff**: zeigt den echten Hergang, enttarnt die
+  Mitwisser*innen und ob die Ermittler richtiglagen, plus laufenden
+  Punktestand der Session
 - **Navigation** zwischen allen Bildschirmen über React Navigation
   (Native Stack)
 - **Nächste Runde** direkt aus dem Ergebnis-Bildschirm (neue Verdächtige,
@@ -78,7 +84,7 @@ alibi-game/
 │   │   ├── game.ts             # Spielmodi, Suspects/Scenario/Verdict-Typen
 │   │   └── navigation.ts       # RootStackParamList für type-safe Navigation
 │   └── utils/
-│       └── random.ts           # Zufällige Auswahl: Verdächtige, Szenario, Schuldfrage
+│       └── random.ts           # Zufällige Auswahl: Verdächtige, Szenario, Schuldfrage, Mitwisser
 └── assets/                      # App-Icons, Splash-Screen
 ```
 
@@ -145,10 +151,13 @@ Manueller Test-Ablauf für das Spiel:
    wird
 9. Über **„Spiel beenden“** zum Startbildschirm zurückkehren und ein neues
    Spiel starten – der Punktestand muss dabei auf 0:0 zurückgesetzt sein
+10. Mit 6–7 Spielernamen ein neues Spiel starten und prüfen, dass beim
+    Rollen-Reveal zusätzlich eine Person die Mitwisser-Rolle bekommt (mit
+    8–10 Spielern entsprechend zwei); die Auflösung muss die Mitwisser*innen
+    korrekt benennen
 
 ## Geplante nächste Schritte
 
 - Timer-Umsetzung für die Speed-Runde
-- Mehr Rollen bei größeren Gruppen (z. B. zwei Schuldige, ein*e Mitwisser*in)
 - Soundeffekte und Übergangsanimationen
 - Persistente letzte Spielerliste (lokal, ohne Backend)
