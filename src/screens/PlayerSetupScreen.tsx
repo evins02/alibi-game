@@ -41,13 +41,13 @@ export function PlayerSetupScreen({ navigation }: Props) {
     const trimmed = names.map((n) => n.trim()).filter((n) => n.length > 0);
 
     if (trimmed.length < MIN_PLAYERS) {
-      setError(`Ihr braucht mindestens ${MIN_PLAYERS} Leute, sonst läuft nix.`);
+      setError(`Bitte gib mindestens ${MIN_PLAYERS} Spielernamen ein.`);
       return;
     }
 
     const unique = new Set(trimmed.map((n) => n.toLowerCase()));
     if (unique.size !== trimmed.length) {
-      setError('Zwei gleiche Namen geht nicht – macht sie eindeutig.');
+      setError('Alle Spielernamen müssen eindeutig sein.');
       return;
     }
 
@@ -60,9 +60,9 @@ export function PlayerSetupScreen({ navigation }: Props) {
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <Text style={styles.title}>Wer ist dabei?</Text>
+        <Text style={styles.title}>Wer spielt mit?</Text>
         <Text style={styles.subtitle}>
-          {names.length} Leute am Start · mindestens {MIN_PLAYERS}
+          {names.length} Spieler · mindestens {MIN_PLAYERS}
         </Text>
 
         <FlatList
@@ -75,7 +75,7 @@ export function PlayerSetupScreen({ navigation }: Props) {
               <TextInput
                 value={item}
                 onChangeText={(value) => updateName(index, value)}
-                placeholder={`Person ${index + 1}`}
+                placeholder={`Spieler ${index + 1}`}
                 placeholderTextColor={colors.textFaint}
                 style={styles.input}
                 returnKeyType="done"
@@ -93,7 +93,7 @@ export function PlayerSetupScreen({ navigation }: Props) {
           )}
           ListFooterComponent={
             <PartyButton
-              label="+ Person dazu"
+              label="+ Spieler hinzufügen"
               variant="ghost"
               onPress={addPlayer}
             />

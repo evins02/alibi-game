@@ -28,7 +28,7 @@ export function HomeScreen({ navigation }: Props) {
         <Text style={styles.emoji}>🎭🕵️‍♀️</Text>
         <Text style={styles.title}>ALIBI</Text>
         <Text style={styles.subtitle}>
-          Zwei Verdächtige. Ein Vorfall. Wer ist sus? 👀
+          Zwei Verdächtige. Ein Verbrechen. Wer lügt?
         </Text>
       </View>
 

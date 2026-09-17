@@ -21,8 +21,8 @@ export function ModeSelectScreen({ navigation, route }: Props) {
 
   return (
     <ScreenContainer>
-      <Text style={styles.title}>Wähl deinen Modus</Text>
-      <Text style={styles.subtitle}>{players.length} Leute ready</Text>
+      <Text style={styles.title}>Spielmodus wählen</Text>
+      <Text style={styles.subtitle}>{players.length} Spieler bereit</Text>
 
       <FlatList
         data={GAME_MODES}

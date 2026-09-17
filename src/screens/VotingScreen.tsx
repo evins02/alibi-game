@@ -28,10 +28,10 @@ export function VotingScreen({ navigation, route }: Props) {
   return (
     <ScreenContainer style={styles.container}>
       <View>
-        <Text style={styles.title}>Wer war's? 👀</Text>
+        <Text style={styles.title}>Wer ist schuldig?</Text>
         <Text style={styles.subtitle}>
           Alle {investigatorCount} Ermittler einigen sich jetzt gemeinsam (z.
-          B. per Handzeichen oder Diskussion) auf eine Ansage.
+          B. per Handzeichen oder Diskussion) auf eine Anschuldigung.
         </Text>
       </View>
 
@@ -51,7 +51,7 @@ function AccuseOption({ name, onPress }: { name: string; onPress: () => void }) 
     >
       <Text style={styles.optionEmoji}>👉</Text>
       <Text style={styles.optionTitle}>{name}</Text>
-      <Text style={styles.optionDescription}>war's, sus</Text>
+      <Text style={styles.optionDescription}>ist schuldig</Text>
     </Pressable>
   );
 }
