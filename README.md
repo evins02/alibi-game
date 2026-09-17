@@ -11,7 +11,8 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
 
 ## Wie man spielt
 
-1. 3–10 Spielernamen eingeben und einen Modus wählen
+1. Ab 3 Spielernamen aufwärts eingeben (kein Maximum – auch für große
+   Partys) und einen Modus wählen
 2. Die App lost zwei Verdächtige und einen zufälligen Vorfall aus (z. B.
    "der letzte Kuchen ist verschwunden")
 3. Das Gerät geht nacheinander an beide Verdächtigen – jede*r sieht **geheim**
@@ -32,8 +33,8 @@ und keine externen APIs – das gesamte Spiel läuft lokal auf dem Gerät.
 ## Funktionsumfang (aktueller Stand)
 
 - **Startbildschirm** mit Spiel-Branding im dunklen Party-Look
-- **Spieler-Eingabe**: 3 bis 10 Spielernamen hinzufügen/entfernen, mit
-  Validierung (Mindestanzahl, eindeutige Namen)
+- **Spieler-Eingabe**: beliebig viele Spielernamen (ab 3) hinzufügen/entfernen,
+  mit Validierung (Mindestanzahl, eindeutige Namen)
 - **Spielmodus-Auswahl**: Klassisch, Chaos-Modus, Speed-Runde
 - **Zufällige Auslosung** von zwei Verdächtigen, einem Vorfall-Szenario aus
   einem Katalog von 20 Situationen, und wer von beiden wirklich schuldig ist
@@ -135,7 +136,7 @@ npx expo-doctor
 Manueller Test-Ablauf für das Spiel:
 
 1. `npm start` ausführen und App auf Gerät/Emulator öffnen
-2. Auf **„Spiel starten“** tippen, 3–10 Spielernamen eingeben
+2. Auf **„Spiel starten“** tippen, mindestens 3 Spielernamen eingeben
 3. Modus wählen, auf **„Verdächtige auslosen“** tippen
 4. Prüfen, dass zwei Verdächtige **und** ein Vorfall angezeigt werden, aber
    nicht, wer schuldig ist

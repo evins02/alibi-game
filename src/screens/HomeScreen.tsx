@@ -37,7 +37,7 @@ export function HomeScreen({ navigation }: Props) {
           label="Spiel starten"
           onPress={() => navigation.navigate('PlayerSetup')}
         />
-        <Text style={styles.hint}>3–10 Spieler · kein Internet nötig</Text>
+        <Text style={styles.hint}>Ab 3 Spieler*innen · kein Internet nötig</Text>
       </View>
     </ScreenContainer>
   );

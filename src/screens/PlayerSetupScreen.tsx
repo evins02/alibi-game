@@ -18,7 +18,6 @@ import { radius, spacing } from '../theme/spacing';
 type Props = NativeStackScreenProps<RootStackParamList, 'PlayerSetup'>;
 
 const MIN_PLAYERS = 3;
-const MAX_PLAYERS = 10;
 
 export function PlayerSetupScreen({ navigation }: Props) {
   const [names, setNames] = useState<string[]>(['', '', '']);
@@ -30,7 +29,6 @@ export function PlayerSetupScreen({ navigation }: Props) {
   }
 
   function addPlayer() {
-    if (names.length >= MAX_PLAYERS) return;
     setNames((prev) => [...prev, '']);
   }
 
@@ -64,7 +62,7 @@ export function PlayerSetupScreen({ navigation }: Props) {
       >
         <Text style={styles.title}>Wer spielt mit?</Text>
         <Text style={styles.subtitle}>
-          {names.length}/{MAX_PLAYERS} Spieler · mindestens {MIN_PLAYERS}
+          {names.length} Spieler · mindestens {MIN_PLAYERS}
         </Text>
 
         <FlatList
@@ -94,13 +92,11 @@ export function PlayerSetupScreen({ navigation }: Props) {
             </View>
           )}
           ListFooterComponent={
-            names.length < MAX_PLAYERS ? (
-              <PartyButton
-                label="+ Spieler hinzufügen"
-                variant="ghost"
-                onPress={addPlayer}
-              />
-            ) : null
+            <PartyButton
+              label="+ Spieler hinzufügen"
+              variant="ghost"
+              onPress={addPlayer}
+            />
           }
         />
 
