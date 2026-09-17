@@ -68,10 +68,10 @@ export function RevealScreen({ navigation, route }: Props) {
         </View>
 
         <Text style={styles.instructions}>
-          Diese zwei Personen sind verdächtig. Nur eine*r von beiden ist
-          wirklich schuldig – aber wer das ist, weiß bisher niemand, nicht
-          einmal die beiden selbst. Gleich sieht jede*r geheim die eigene
-          Rolle, ohne dass die andere Person mitschaut.
+          Diese zwei sind sus 👀. Nur eine*r von beiden ist wirklich schuldig
+          – aber wer das ist, weiß bisher niemand, nicht mal die beiden
+          selbst. Gleich sieht jede*r geheim die eigene Rolle, ohne dass die
+          andere Person mitschaut.
           {accomplices.length > 0 &&
             ` Außerdem gibt es diese Runde ${accomplices.length === 1 ? 'einen heimlichen Mitwisser' : `${accomplices.length} heimliche Mitwisser`} unter den Ermittlern.`}
         </Text>

@@ -9,122 +9,120 @@ import type { Scenario } from '../types/game';
 export const SCENARIOS: Scenario[] = [
   {
     incident:
-      'Gestern Abend gegen 22 Uhr ist auf der Party plötzlich der letzte Kuchen spurlos verschwunden.',
+      'Im Gruppenchat ist heute Nacht eine super cringe Sprachnachricht aufgetaucht, die eigentlich privat bleiben sollte.',
     secretDetail:
-      'Du hattest Heißhunger, hast ihn allein im Bad gegessen und die Verpackung im Nachbargarten versteckt.',
+      'Du hast sie im Halbschlaf aus Versehen in den falschen Chat geschickt.',
   },
   {
     incident:
-      'Heute Nachmittag wurde im Wohnzimmer die teure Vase zerbrochen gefunden – niemand will es gewesen sein.',
+      'Jemand hat den Serien-Cliffhanger von letzter Nacht schon im Gruppenchat gespoilert, bevor alle fertig geschaut hatten.',
     secretDetail:
-      'Du bist beim Herumalbern dagegengestoßen, hast die Scherben schnell weggeräumt und nichts gesagt.',
+      'Deine Reaction war einfach zu groß, du konntest nicht warten und hast drauflos getippt.',
   },
   {
     incident:
-      'Vor einer Stunde wurde das WLAN-Passwort ohne Ansage geändert, und alle sitzen offline da.',
+      'Der Insta-Streak mit der ganzen Gruppe ist heute Morgen plötzlich gerissen.',
     secretDetail:
-      'Du wolltest kurz ungestört sein und hast das Passwort geändert, weil dich die Gruppenchat-Nachrichten genervt haben.',
+      'Dein Akku ist nachts leer gegangen, und du hast komplett verpennt, rechtzeitig zu snappen.',
   },
   {
     incident:
-      'Letzten Samstag um Mitternacht wurde die Musikanlage im Partykeller lautstark kaputt gestellt.',
+      'Auf der Story von gestern ist ein richtig peinliches Video aufgetaucht, das eigentlich keiner sehen sollte.',
     secretDetail:
-      'Du wolltest zeigen, dass du die Lautstärke voll aufdrehen kannst, und hast dabei einen Lautsprecher überlastet.',
+      'Du fandest es zu lustig und hast es gepostet, ohne nachzudenken, wer es alles sieht.',
   },
   {
     incident:
-      'Heute Morgen um 8 Uhr war die komplette Chipstüte schon leer, obwohl sie erst gestern geöffnet wurde.',
+      'Das gemeinsame Streaming-Passwort wurde heute geändert, ohne dass jemand Bescheid gesagt hat.',
     secretDetail:
-      'Du konntest nachts nicht schlafen, bist runter in die Küche und hast die ganze Tüte allein leer gegessen.',
+      'Du dachtest, es schauen zu viele Leute gleichzeitig, und hast es einfach geändert.',
   },
   {
     incident:
-      'Gegen 23 Uhr ist auf dem Parkplatz ein Auto sehr schief eingeparkt worden – quer über zwei Plätze.',
+      'Beim letzten Squad-Abend hat jemand mitten im wichtigsten Match einfach disconnected.',
     secretDetail:
-      'Du hattest es eilig, weil du aufs Klo musstest, und hast dir keine Zeit fürs richtige Einparken genommen.',
+      'Dein Handy hat geklingelt und du bist rangegangen, ohne Bescheid zu sagen.',
   },
   {
     incident:
-      'Vor Kurzem wurde ein extrem peinliches Foto aus der Gruppe in den Chat gepostet.',
+      'Jemand hat den Rest der Pizza aufgegessen, bevor der Nachschlag überhaupt geliefert wurde.',
     secretDetail:
-      'Du fandest das Foto zu witzig, um es für dich zu behalten, und hast es ohne nachzudenken geteilt.',
+      'Du hattest richtig Hunger nach dem Sport und konntest einfach nicht warten.',
   },
   {
     incident:
-      'Heute wurde die geheime Zutat aus dem Kühlschrank geklaut, kurz bevor das Essen fertig war.',
+      'In der Gruppen-Story ist ein Foto aufgetaucht, auf dem jemand richtig unvorteilhaft aussieht.',
     secretDetail:
-      'Du wolltest heimlich probieren, wie sie pur schmeckt, und hast am Ende die ganze Portion aufgegessen.',
+      'Du fandest das Foto zu lustig, um es nicht zu posten, und hast nicht weiter nachgedacht.',
   },
   {
     incident:
-      'Gestern Abend ist mitten in der Ruhephase der Feueralarm ausgelöst worden – aus Versehen oder Absicht?',
+      'Der gemeinsame Musik-Account hat plötzlich eine komplett cringe Playlist in "Zuletzt gehört".',
     secretDetail:
-      'Du hast in der Küche heimlich Popcorn gemacht und dabei den Rauchmelder ausgelöst.',
+      'Du hast dich heimlich eingeloggt, um deine Lieblingssongs zu hören, und vergessen, dass alle es sehen.',
   },
   {
     incident:
-      'Vor einer halben Stunde wurde die Kaffeekasse geplündert, und es fehlt genau der Betrag für zwei Eis.',
+      'Mitten in der Stille im Unterricht ist plötzlich laut ein Handy losgegangen.',
     secretDetail:
-      'Du hattest kein Bargeld dabei und hast dir das Geld "geliehen", ohne es aufzuschreiben.',
+      'Du hast vergessen, den Ton auszuschalten, weil du kurz vorher noch getippt hast.',
   },
   {
     incident:
-      'Heute Nachmittag ist der Hund der Nachbarn plötzlich unbeaufsichtigt durchs Treppenhaus spaziert.',
+      'Die Kopfhörer von jemandem sind spurlos verschwunden – zuletzt lagen sie auf dem Tisch.',
     secretDetail:
-      'Du hast die Tür offen gelassen, weil du kurz was aus dem Auto holen wolltest, und der Hund ist einfach raus.',
+      'Du hast sie kurz ausprobiert und danach total vergessen, wo du sie hingelegt hast.',
   },
   {
     incident:
-      'Letzte Nacht wurde die komplett aufgebaute Zelt-Deko im Garten wieder abgebaut – ohne dass es jemand zugeben will.',
+      'In der Gruppen-Bio steht plötzlich ein komplett anderer, sehr cringe Text.',
     secretDetail:
-      'Du dachtest, es sollte aufgeräumt werden, bevor es regnet, und hast alles allein wieder abgebaut.',
+      'Du hattest kurz Zugriff aufs Konto und dachtest, das wäre ein guter Prank.',
   },
   {
     incident:
-      'Vor Kurzem wurde beim Gruppenfoto absichtlich die Grimasse geschnitten, die alle ruiniert hat.',
+      'Jemand hat den Highscore im gemeinsamen Handyspiel über Nacht komplett pulverisiert.',
     secretDetail:
-      'Du fandest das Foto zu ernst und wolltest es witziger machen, ohne vorher jemanden zu fragen.',
+      'Du konntest nicht schlafen und hast heimlich stundenlang weitergezockt.',
   },
   {
     incident:
-      'Heute Morgen war plötzlich der Kühlschrank leer geräumt, kurz bevor das Frühstück geplant war.',
+      'Ein Video ist weiterverbreitet worden, das eigentlich nur im engsten Kreis bleiben sollte.',
     secretDetail:
-      'Du hast spätnachts alles durchsucht, weil du Hunger hattest, und am Ende fast alles selbst gegessen.',
+      'Du hast es geteilt, weil du dachtest, es sieht sowieso keiner Wichtiges.',
   },
   {
     incident:
-      'Gestern wurde mitten im Film laut über das Ende gespoilert, bevor alle fertig geschaut hatten.',
-    secretDetail:
-      'Du hattest den Film schon gesehen und es ist dir einfach so rausgerutscht, ohne nachzudenken.',
+      'Der letzte Energydrink aus der gemeinsamen Vorratskiste ist spurlos weg.',
+    secretDetail: 'Du hattest Bock drauf und hast einfach zugegriffen, ohne zu fragen.',
   },
   {
     incident:
-      'Vor einer Stunde ist auf mysteriöse Weise die Fernbedienung im Gefrierfach aufgetaucht.',
-    secretDetail:
-      'Du hast sie aus Spaß dort versteckt, um zu sehen, wie lange es dauert, bis sie jemand findet.',
+      'Im Gruppenchat ist versehentlich ein Sprachmemo gelandet, das eigentlich für jemand ganz anderen gedacht war.',
+    secretDetail: 'Du hast dich vertippt und den falschen Chat erwischt.',
   },
   {
     incident:
-      'Heute Abend wurde beim Kartenspiel eindeutig geschummelt – aber wer genau?',
+      'In der Fotogalerie vom gemeinsamen Ausflug ist plötzlich ein Foto, das komplett fehl am Platz ist.',
     secretDetail:
-      'Du hast heimlich eine Karte nachgeschaut, weil du unbedingt gewinnen wolltest.',
+      'Du hast beim Fotomachen aus Versehen den Auslöser zu oft gedrückt.',
   },
   {
     incident:
-      'Vor Kurzem wurde die Lieblingstasse von jemandem klammheimlich zerbrochen und einfach weggeräumt.',
+      'Jemand hat das Standort-Teilen ausgeschaltet, kurz bevor sich alle treffen wollten.',
     secretDetail:
-      'Sie ist dir beim Abwaschen aus der Hand gerutscht, und du hast die Scherben schnell im Müll versteckt.',
+      'Du wolltest kurz allein sein, hast es ausgemacht und dann vergessen, es wieder anzuschalten.',
   },
   {
     incident:
-      'Gestern Nacht ist die Balkontür stundenlang offen geblieben, und die ganze Wohnung war eiskalt.',
+      'In der Gruppenumfrage ist plötzlich eine total unpassende Antwort aufgetaucht.',
     secretDetail:
-      'Du wolltest kurz draußen frische Luft schnappen und hast danach völlig vergessen, die Tür zu schließen.',
+      'Du hast aus Spaß was Falsches reingetippt, ohne zu denken, dass es ernst genommen wird.',
   },
   {
     incident:
-      'Heute wurde ohne Erlaubnis das letzte Stück Pizza aus der Box direkt vor der Bestellung der Rest-Lieferung gegessen.',
+      'Der Gruppenchat-Name wurde über Nacht in etwas völlig Peinliches umbenannt.',
     secretDetail:
-      'Du dachtest, es fällt nicht auf, wenn du es schnell isst, bevor jemand fragt, wem es gehört.',
+      'Du fandest das lustig und hast es geändert, kurz bevor du eingeschlafen bist.',
   },
 ];

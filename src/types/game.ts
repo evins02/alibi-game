@@ -12,21 +12,21 @@ export const GAME_MODES: GameMode[] = [
     id: 'classic',
     title: 'Klassisch',
     description:
-      'Eine*r der beiden Verdächtigen ist heimlich wirklich schuldig, der/die andere ist unschuldig – beide sehen ihre Rolle geheim auf dem Gerät, ohne sich vorher abzusprechen. Danach befragen die Ermittler beide einzeln.',
+      'Eine Person ist heimlich wirklich schuldig, die andere komplett unschuldig – aber keiner weiß, wer von beiden, nicht mal sie selbst. Rollen geheim ansehen, dann verhört der Rest die beiden einzeln.',
     emoji: '🕵️',
   },
   {
     id: 'chaos',
     title: 'Chaos-Modus',
     description:
-      'Wie Klassisch, aber mit einer verrückten Zusatzregel, die sich die Ermittler vorher ausdenken (z. B. nur Ja/Nein-Antworten, im Dialekt sprechen).',
+      'Wie Klassisch, aber mit einer verrückten Extra-Regel, die sich die Gruppe vorher ausdenkt (z. B. nur Ja/Nein-Antworten, im Akzent sprechen).',
     emoji: '🌀',
   },
   {
     id: 'speed',
     title: 'Speed-Runde',
     description:
-      'Wie Klassisch, aber die Ermittler geben sich selbst nur wenige Minuten Zeit für die Befragung, bevor abgestimmt werden muss.',
+      'Wie Klassisch, aber ihr gebt euch selbst nur ein paar Minuten fürs Verhör, bevor abgestimmt werden muss.',
     emoji: '⏱️',
   },
 ];

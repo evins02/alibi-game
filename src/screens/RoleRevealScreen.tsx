@@ -101,8 +101,8 @@ export function RoleRevealScreen({ navigation, route }: Props) {
               <Text style={styles.detailText}>{scenario.secretDetail}</Text>
             </View>
             <Text style={styles.subtitle}>
-              Du kennst die Wahrheit – aber du musst sie verstecken. Denk dir
-              glaubwürdige Antworten aus, ohne dich zu verraten.
+              Du kennst die Wahrheit – aber du musst cool bleiben. Erzähl was
+              Glaubwürdiges, ohne dich zu verplappern.
             </Text>
           </>
         )}
@@ -112,9 +112,9 @@ export function RoleRevealScreen({ navigation, route }: Props) {
             <Text style={styles.roleEmoji}>🟢</Text>
             <Text style={styles.roleTitle}>Du bist unschuldig</Text>
             <Text style={styles.subtitle}>
-              Du weißt nicht, was wirklich passiert ist. Antworte einfach
-              ehrlich und aus dem Bauch heraus – auch wenn du dadurch
-              verdächtig wirken könntest.
+              Du weißt von nichts. Antworte einfach ehrlich und aus dem
+              Bauch heraus – auch wenn's dadurch sus aussieht, du bist
+              trotzdem clean.
             </Text>
           </>
         )}
@@ -128,9 +128,9 @@ export function RoleRevealScreen({ navigation, route }: Props) {
               <Text style={styles.detailText}>{guiltyName} ist schuldig.</Text>
             </View>
             <Text style={styles.subtitle}>
-              Tu während der Befragung so, als wärst du ein ganz normaler
-              Ermittler. Versuch geschickt, den Verdacht von {guiltyName}{' '}
-              wegzulenken, ohne dass jemand merkt, dass du es weißt.
+              Tu total normal, als wärst du ein ganz gewöhnlicher Ermittler.
+              Lenk den Verdacht unauffällig von {guiltyName} weg – und flieg
+              selbst nicht auf.
             </Text>
           </>
         )}

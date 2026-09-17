@@ -46,12 +46,12 @@ export function ResultScreen({ navigation, route }: Props) {
         <View style={styles.resultBlock}>
           <Text style={styles.emoji}>{caughtRightPerson ? '🚨' : '🎭'}</Text>
           <Text style={styles.title}>
-            {caughtRightPerson ? 'Die Ermittler gewinnen!' : 'Der/die Schuldige entkommt!'}
+            {caughtRightPerson ? 'Busted! 🚨' : 'Clean davongekommen 🎭'}
           </Text>
           <Text style={styles.description}>
             {caughtRightPerson
-              ? `Richtig! ${guiltyName} war tatsächlich schuldig und wurde entlarvt.`
-              : `Falsch! Die Ermittler haben ${accusedName} beschuldigt, aber ${guiltyName} war die/der wahre Täter*in.`}
+              ? `Richtig gecheckt! ${guiltyName} war tatsächlich schuldig und ist aufgeflogen.`
+              : `Falscher Verdacht! Die Ermittler haben ${accusedName} beschuldigt, aber ${guiltyName} war die/der wahre Täter*in.`}
           </Text>
         </View>
 
